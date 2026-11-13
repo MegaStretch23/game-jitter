@@ -1,0 +1,22 @@
+{
+  "kind": "ping",
+  "total": 60,
+  "received": 60,
+  "lost": 0,
+  "loss_pct": 0.0,
+  "mean_ms": 1.42,
+  "min_ms": 1.24,
+  "max_ms": 5.58,
+  "median_ms": 1.33,
+  "p95_ms": 1.53,
+  "p99_ms": 5.58,
+  "jitter_ms": 0.21,
+  "spikes": 0,
+  "spike_pct": 0.0,
+  "spike_threshold_ms": 31.33,
+  "verdict": "good",
+  "reasons": [
+    "loss, jitter, p99 and spikes are all within the good range"
+  ],
+  "notes": []
+}

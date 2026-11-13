@@ -1,0 +1,9 @@
+Verdict: GOOD
+  - loss, jitter, p99 and spikes are all within the good range
+
+Source: ping
+Packets: 60 sent/seen, 60 replies, 0 lost (0%)
+Latency ms: mean 1.42, median 1.33, min 1.24, max 5.58
+Percentiles ms: p95 1.53, p99 5.58
+Jitter ms: 0.21
+Spikes: 0 (above 31.33 ms), 0% of replies

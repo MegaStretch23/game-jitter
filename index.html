@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Jitter: check your ping for competitive play</title>
+<meta name="description" content="Paste ping results or load a ping or mtr file. Get mean, p95, p99, jitter, packet loss, spike count and a plain good, borderline or bad verdict. Runs in your browser, nothing is uploaded.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Game Jitter</h1>
+<p class="lead">Paste ping results or load a <code>ping</code> or <code>mtr -r</code> output file. You get mean, p95 and p99 latency, jitter, packet loss, spike count and a plain verdict for competitive play: <b>good</b>, <b>borderline</b> or <b>bad</b>.</p>
+<p class="priv">Runs in this tab. Your samples are not uploaded or stored: the page makes no network requests of its own and has no analytics.</p>
+
+<label for="in">Ping output, or numbers in milliseconds (one per line; <code>timeout</code> or <code>*</code> for a lost packet)</label>
+<textarea id="in" rows="10" spellcheck="false" placeholder="64 bytes from 1.1.1.1: icmp_seq=1 ttl=57 time=12.3 ms&#10;64 bytes from 1.1.1.1: icmp_seq=2 ttl=57 time=11.9 ms&#10;..."></textarea>
+<div class="row">
+  <button id="go" type="button">Analyze</button>
+  <label class="file">Load a file <input id="file" type="file" accept=".txt,.log,text/plain"></label>
+  <button id="ex" type="button" class="alt">Try made-up example numbers</button>
+</div>
+
+<section id="out" hidden aria-live="polite">
+  <div id="badge" class="badge"></div>
+  <ul id="reasons"></ul>
+  <table id="tbl"></table>
+  <svg id="chart" viewBox="0 0 600 120" role="img" aria-label="Latency per packet"></svg>
+  <ul id="notes" class="notes"></ul>
+  <button id="copy" type="button" class="alt">Copy result as text</button>
+</section>
+<p id="err" class="err" hidden></p>
+
+<h2>How it is computed</h2>
+<ul class="how">
+<li><b>Jitter</b>: mean absolute difference between consecutive replies (a lost packet breaks the pair).</li>
+<li><b>p95 / p99</b>: nearest-rank percentiles of the replies. Below 20 replies they are not meaningful, and the page says so.</li>
+<li><b>Spike</b>: a reply above the larger of 2 x median and median + 30 ms.</li>
+<li><b>Verdict</b>: <b>bad</b> if packet loss &ge; 2%, jitter &ge; 30 ms, p99 &ge; 150 ms or spikes &ge; 5% of replies; <b>good</b> if loss &le; 0.5%, jitter &le; 10 ms, p99 &le; 100 ms and spikes &le; 2%; otherwise <b>borderline</b>. These cutoffs are this tool's own rule of thumb, not a standard.</li>
+<li>mtr report files carry one summary line per hop, so only loss, mean, fastest, slowest and standard deviation are available.</li>
+</ul>
+<p class="foot">Free and open source (MIT): <a href="https://github.com/MegaStretch23/game-jitter">github.com/MegaStretch23/game-jitter</a>. Includes a Python command-line version.</p>
+</main>
+<script src="jitter.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

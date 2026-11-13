@@ -1,0 +1,8 @@
+{
+  "name": "game-jitter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Browser tool and Python CLI: mean, p95, p99, jitter, packet loss and spikes from ping output, with a good/borderline/bad verdict",
+  "license": "MIT",
+  "scripts": { "test": "node --test tests/ && python3 -m unittest discover -s tests" }
+}
